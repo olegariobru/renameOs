@@ -1,62 +1,67 @@
-# 📝 RenameOS
+# RenameOS — Renomeação por CSV
 
-Este projeto é um script em Python para renomear arquivos de uma pasta mantendo o nome original e adicionando um sufixo específico definido em um arquivo CSV.
+Script Python para renomear arquivos em lote, acrescentando um sufixo definido em um CSV e preservando a extensão.
 
----
+Esta é a versão por linha de comando. A aplicação com interface gráfica está em [renameOSnew](https://github.com/olegariobru/renameOSnew).
 
-## 📌 Funcionalidade
-- Lê um arquivo CSV contendo:
-  - O nome original do arquivo (sem extensão)
-  - O novo sufixo que deve ser adicionado
-- Renomeia todos os arquivos de uma pasta de forma automatizada
-- Mantém a extensão original dos arquivos
-- Funciona com milhares de arquivos (testado com mais de 12.000)
+## Funcionalidades
 
----
+- Leitura de correspondências entre nome original e sufixo.
+- Renomeação dos arquivos encontrados na pasta configurada.
+- Preservação da extensão.
+- Exibição das operações realizadas e dos arquivos ignorados.
 
-## 📂 Estrutura esperada
+## Tecnologias
 
-/RenameOS
-├── renomear.py # Script principal
-├── nomes.csv # Lista de nomes originais e sufixos
-├── /pasta_imagens # Pasta contendo os arquivos a serem renomeados
+Python 3, pandas e módulo `os`.
 
+## Como executar
 
----
-
-## 📄 Formato do CSV
-
-O arquivo `nomes.csv` deve ter a seguinte estrutura:
-
-| original   | sufixo            |
-|------------|-------------------|
-| 123456678  | PPSCFJGV20250808   |
-| 098765433  | PPSCFJGV202400900971 |
-
-⚠ **Importante:** Não inclua extensão nos nomes originais no CSV.
-
----
-
-## 🚀 Como usar
-
-1. Coloque todos os arquivos que deseja renomear dentro da pasta `pasta_imagens`.
-2. Crie o arquivo `nomes.csv` com os nomes originais e sufixos(Novos).
-3. Execute o script:
-
-```
-python renomear.py
+```bash
+git clone https://github.com/olegariobru/renameOs.git
+cd renameOs
+python -m pip install pandas
 ```
 
-🛠 Requisitos
-Python 3.x instalado
+Edite `Desktop/RenameScript/renameOs.py` e ajuste as variáveis `pasta` e `csv_path` para a pasta e o CSV que deseja utilizar.
 
-Biblioteca pandas (para ler o CSV)
+O CSV deve conter exatamente as colunas `nome_original` e `sufixo`. Não inclua a extensão em `nome_original`.
 
-Para instalar:
+```csv
+nome_original,sufixo
+documento-a,revisado
+documento-b,2026
 ```
-pip install pandas
 
+Nesse exemplo, `documento-a.pdf` se torna `documento-a_revisado.pdf`.
+
+Execute:
+
+```bash
+python Desktop/RenameScript/renameOs.py
 ```
 
-📜 Licença
-Este projeto está licenciado sob a licença MIT - sinta-se livre para usar e modificar.
+## Verificação e limites
+
+Execute primeiro sobre uma pasta com cópias de arquivos. O script realiza renomeações diretamente e ainda não oferece simulação, rollback ou tratamento completo de conflitos.
+
+Não há testes automatizados no repositório.
+
+## Próximos passos
+
+- Receber caminhos por argumentos de linha de comando.
+- Incluir modo de simulação.
+- Validar conflitos antes de renomear.
+- Registrar operações e permitir reversão.
+
+## Como contribuir
+
+Abra uma issue com o problema ou a melhoria proposta. Para enviar código, crie um fork e uma branch, mantenha a alteração focada e abra um pull request explicando o resultado e como verificou o funcionamento.
+
+## Licença
+
+Este repositório ainda não contém um arquivo `LICENSE`. A licença de uso e redistribuição precisa ser formalizada pelo autor.
+
+## Autor
+
+[Bruno Olegário](https://github.com/olegariobru) · [LinkedIn](https://www.linkedin.com/in/bolgarimacedo/)
